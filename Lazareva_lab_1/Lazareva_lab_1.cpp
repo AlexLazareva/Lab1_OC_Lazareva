@@ -1,12 +1,37 @@
 ﻿// Lazareva_lab_1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
 //
-
+#include <Windows.h>
+#include <string>
 #include <iostream>
+
+using namespace std;
+
+// 3. Определить и вывести значение текущего каталога для процесса
+string getCurrentDirectoryOnWindows()
+{
+    const unsigned long maxDir = 2048;
+    char CurDir[maxDir];
+
+    GetCurrentDirectory(strlen(CurDir), CurDir);
+    return string(CurDir);
+}
+
+// 4. Прочитать и вывести значение переменной окружения “PATH”. 
+string getCurrentEnviromentVarsOnWindows() {
+    const unsigned long maxValue = 4096;
+    char Value[maxValue];
+
+    GetEnvironmentVariable("PATH", Value, strlen(Value));
+    return string(Value);
+}
 
 int main(int argc, char *argv[])
 {
-    puts("HELLO!!!");
-    getchar();
+    // вывод значения текущего каталога процесса
+    std::cout << "Path: " << getCurrentDirectoryOnWindows() << std::endl;
+
+    // вывод переменной окружения
+    std::cout << "Environment variables PATH is: " << getCurrentEnviromentVarsOnWindows() << std::endl;
     return 0;
 }
 

@@ -25,13 +25,20 @@ string getCurrentEnviromentVarsOnWindows() {
     return string(Value);
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[], char *envp[])
 {
     // вывод значения текущего каталога процесса
-    std::cout << "Path: " << getCurrentDirectoryOnWindows() << std::endl;
+    //std::cout << "Path: " << getCurrentDirectoryOnWindows() << std::endl;
 
     // вывод переменной окружения
-    std::cout << "Environment variables PATH is: " << getCurrentEnviromentVarsOnWindows() << std::endl;
+    //std::cout << "Environment variables PATH is: " << getCurrentEnviromentVarsOnWindows() << std::endl;
+
+    // вывод всех переменных окружения процесса
+    for (int i = 0; envp[i]; i++)
+    {
+        puts(envp[i]);
+    }
+        
     return 0;
 }
 

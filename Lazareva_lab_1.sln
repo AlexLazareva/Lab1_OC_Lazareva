@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lazareva_lab_1", "Lazareva_lab_1\Lazareva_lab_1.vcxproj", "{E8DA3557-36D0-4250-A82C-4F33CE70B0FE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Child", "Child\Child.vcxproj", "{E938678F-E196-43EA-8BA8-1669CE155D66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{E8DA3557-36D0-4250-A82C-4F33CE70B0FE}.Release|x64.Build.0 = Release|x64
 		{E8DA3557-36D0-4250-A82C-4F33CE70B0FE}.Release|x86.ActiveCfg = Release|Win32
 		{E8DA3557-36D0-4250-A82C-4F33CE70B0FE}.Release|x86.Build.0 = Release|Win32
+		{E938678F-E196-43EA-8BA8-1669CE155D66}.Debug|x64.ActiveCfg = Debug|x64
+		{E938678F-E196-43EA-8BA8-1669CE155D66}.Debug|x64.Build.0 = Debug|x64
+		{E938678F-E196-43EA-8BA8-1669CE155D66}.Debug|x86.ActiveCfg = Debug|Win32
+		{E938678F-E196-43EA-8BA8-1669CE155D66}.Debug|x86.Build.0 = Debug|Win32
+		{E938678F-E196-43EA-8BA8-1669CE155D66}.Release|x64.ActiveCfg = Release|x64
+		{E938678F-E196-43EA-8BA8-1669CE155D66}.Release|x64.Build.0 = Release|x64
+		{E938678F-E196-43EA-8BA8-1669CE155D66}.Release|x86.ActiveCfg = Release|Win32
+		{E938678F-E196-43EA-8BA8-1669CE155D66}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

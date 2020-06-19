@@ -6,6 +6,8 @@
 
 using namespace std;
 
+const unsigned long maxValue = 4096;
+
 // 3. Определить и вывести значение текущего каталога для процесса
 string getCurrentDirectoryOnWindows()
 {
@@ -17,12 +19,23 @@ string getCurrentDirectoryOnWindows()
 }
 
 // 4. Прочитать и вывести значение переменной окружения “PATH”. 
-string getCurrentEnviromentVarsOnWindows() {
-    const unsigned long maxValue = 4096;
+string getCurrentEnviromentVarsOnWindows() 
+{
     char Value[maxValue];
 
     GetEnvironmentVariable("PATH", Value, strlen(Value));
     return string(Value);
+}
+
+// 6. Создать новую переменную окружения (произвольное имя и произвольное значение).
+string createCustomEnvironmentVar()
+{
+    char newValue[maxValue];
+
+    SetEnvironmentVariable("NewCustomVar", "Lazareva");
+    GetEnvironmentVariable("NewCustomVar", newValue, strlen(newValue));
+
+    return string(newValue);
 }
 
 int main(int argc, char *argv[], char *envp[])
@@ -33,11 +46,21 @@ int main(int argc, char *argv[], char *envp[])
     // вывод переменной окружения
     //std::cout << "Environment variables PATH is: " << getCurrentEnviromentVarsOnWindows() << std::endl;
 
-    // вывод всех переменных окружения процесса
-    for (int i = 0; envp[i]; i++)
-    {
-        puts(envp[i]);
-    }
+    // 5. вывод всех переменных окружения процесса
+    //for (int i = 0; envp[i]; i++)
+    //{
+    //    puts(envp[i]);
+    //}
+
+    // вывод новой переменной окружения с произвольным именем и значением
+    //std::cout << "Custom environment variable is: " << createCustomEnvironmentVar() << std::endl;
+
+    PROCESS_INFORMATION pi1, pi2;
+
+    STARTUPINFO si1 = { sizeof(si1) };
+    STARTUPINFO si2 = { sizeof(si2) };
+
+    CreateProcessA(NULL, (LPSTR)"C:\\Users\\User\\source\\repos\\Lazareva_lab_1\\Release\\Child.exe", NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, &si2, &pi2);
         
     return 0;
 }

@@ -28,41 +28,51 @@ string getCurrentEnviromentVarsOnWindows()
 }
 
 // 6. Создать новую переменную окружения (произвольное имя и произвольное значение).
-string createCustomEnvironmentVar()
-{
-    char newValue[maxValue];
 
-    SetEnvironmentVariable("NewCustomVar", "Lazareva");
-    GetEnvironmentVariable("NewCustomVar", newValue, strlen(newValue));
-
-    return string(newValue);
-}
 
 int main(int argc, char *argv[], char *envp[])
 {
     // вывод значения текущего каталога процесса
-    //std::cout << "Path: " << getCurrentDirectoryOnWindows() << std::endl;
+    std::cout << "Path: " << getCurrentDirectoryOnWindows() << std::endl;
 
     // вывод переменной окружения
-    //std::cout << "Environment variables PATH is: " << getCurrentEnviromentVarsOnWindows() << std::endl;
+    std::cout << "Environment variables PATH is: " << getCurrentEnviromentVarsOnWindows() << std::endl;
 
     // 5. вывод всех переменных окружения процесса
-    //for (int i = 0; envp[i]; i++)
-    //{
-    //    puts(envp[i]);
-    //}
+    for (int i = 0; envp[i]; i++)
+    {
+        puts(envp[i]);
+    }
 
     // вывод новой переменной окружения с произвольным именем и значением
-    //std::cout << "Custom environment variable is: " << createCustomEnvironmentVar() << std::endl;
+    SetEnvironmentVariable("MyVar", "Lazareva");
+    char newValue[maxValue];
+    GetEnvironmentVariable("MyVar", newValue, strlen(newValue));
 
     PROCESS_INFORMATION pi1, pi2;
-
     STARTUPINFO si1 = { sizeof(si1) };
     STARTUPINFO si2 = { sizeof(si2) };
+    
+    SECURITY_ATTRIBUTES saProcess = { TRUE,NULL, sizeof(saProcess) };
+    SECURITY_ATTRIBUTES saThread = { FALSE,NULL, sizeof(saThread) };
 
-    CreateProcessA(NULL, (LPSTR)"C:\\Users\\User\\source\\repos\\Lazareva_lab_1\\Release\\Child.exe", NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, &si2, &pi2);
-        
-    return 0;
+    saProcess.nLength = sizeof(saProcess);
+    saProcess.lpSecurityDescriptor = NULL;
+    saProcess.bInheritHandle = TRUE;
+
+    CreateProcessA(NULL, (LPSTR)"NOTEPAD", &saProcess, &saThread, FALSE, 0, NULL, NULL, &si1, &pi1);
+
+	char sHandleNP[255];
+	wsprintfA(sHandleNP, "%d", pi1.hProcess);
+	SetEnvironmentVariableA("HANDLENPD", sHandleNP);
+
+    CreateProcessA(NULL, (LPSTR)"C:\\Users\\User\\Documents\\repos\\Lazareva_lab_1\\Debug\\Child.exe 22 45 12 65", 
+        NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, &si2, &pi2);
+
+    DWORD dwExitCode = 0;
+    WaitForSingleObject(pi2.hProcess, INFINITE);
+    GetExitCodeProcess(pi2.hProcess, &dwExitCode);
+    std::cout << dwExitCode << std::endl;
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
